@@ -46,4 +46,11 @@ public class SessaoTest {
 		sessao.setTotalIngressos(5);
 		assertFalse(sessao.podeReservar(-3));
 	}
+	
+	@Test
+	public void naoDeveReservarQuantidadeZero(){
+		Sessao sessao = new Sessao();
+		sessao.setTotalIngressos(5);
+		assertFalse(sessao.podeReservar(0));
+	}
 }
