@@ -15,7 +15,6 @@ import br.com.caelum.agiletickets.domain.Agenda;
 import br.com.caelum.agiletickets.domain.DiretorioDeEstabelecimentos;
 import br.com.caelum.agiletickets.domain.Promocao;
 import br.com.caelum.agiletickets.models.Espetaculo;
-import br.com.caelum.agiletickets.models.Estabelecimento;
 import br.com.caelum.agiletickets.models.Periodicidade;
 import br.com.caelum.agiletickets.models.Sessao;
 import br.com.caelum.vraptor.Get;
@@ -34,8 +33,6 @@ public class EspetaculosController {
 	private final Agenda agenda;
 	private final Validator validator;
 	private final Result result;
-	private Estabelecimento estabelecimento;
-
 	private final DiretorioDeEstabelecimentos estabelecimentos;
 
 	public EspetaculosController(Agenda agenda,
@@ -101,8 +98,7 @@ public class EspetaculosController {
 		}
 
 		if (!sessao.podeReservar(quantidade)) {
-			validator.add(new ValidationMessage(
-					"Nao existem ingressos disponiveis", ""));
+			validator.add(new ValidationMessage("Nao existem ingressos disponiveis", ""));
 		}
 
 		// em caso de erro, redireciona para a lista de sessao
@@ -173,10 +169,5 @@ public class EspetaculosController {
 		}
 		validator.onErrorUse(status()).notFound();
 		return espetaculo;
-	}
-
-	// metodo antigo. aqui soh por backup
-	private Estabelecimento criaEstabelecimento(Long id) {
-		return estabelecimentos.todos().get(0);
 	}
 }

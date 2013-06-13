@@ -87,24 +87,18 @@ public class Sessao {
 		return totalIngressos - ingressosReservados;
 	}
 	
-	// Era usada antes no sistema para avisar o cliente de que
-    // os ingressos estavam acabando!
-    // Hoje nao serve pra nada, mas eh sempre bom ter
-    // um backup guardado! ;)
-    public boolean pertoDoLimiteDeSeguranca_NaoUtilizada()
-    {
-            int limite = 3;
-            return getIngressosDisponiveis() > limite;
-    }
-
 	public void reserva(Integer numeroDeIngressos) {
 		// soma quantidade na variavel ingressos reservados
 		this.ingressosReservados += numeroDeIngressos;
 	}
 
 	public boolean podeReservar(Integer numeroDeIngressos) {
+		if(numeroDeIngressos <= 0){
+			return false;
+		}
+		
 		int sobraram = getIngressosDisponiveis() - numeroDeIngressos;
-        boolean naoTemEspaco = sobraram <= 0;
+        boolean naoTemEspaco = sobraram < 0;
 
         return !naoTemEspaco;
 	}
