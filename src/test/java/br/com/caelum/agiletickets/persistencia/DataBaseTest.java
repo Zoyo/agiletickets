@@ -5,7 +5,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 
+@Ignore
 public class DataBaseTest {
 	
 	protected EntityManager em;
