@@ -1,0 +1,116 @@
+Aula 1
+
+* Conflito entre versionamentos
+  Trabalhar em pequenos pedaços de cógigo;
+    (tentar alterar somente linhas que estão na sequencia - blocos - sempre que possível)
+  
+Dica: usar git-svn  para aproveitar o commit local do git e a atualizção do svn.
+
+repositórios git:
+	github.com - repositórios grátis open source e privados pagos {git}
+	bitbucket.org - repositórios privados grátis com alguns limites {hg, git}
+	sourceforgit.net - {svn, git, bazaar}
+
+São 4 estados de arquivo do git
+  Index...............->
+  Staged for commit...->
+  Changes not staged..-> Existe no git e foi alterado localmente
+  Untracked...........-> Não estão no git (arquivos novos)
+
+comandos git:
+  init..............................-> inicializa um repositório
+  add <arquivos...> ................-> adiciona arquivo no repositório
+  commit............................-> Atualiza a versão localmente
+  commit -m <mensagem  do commit>...-> Atualiza junto com msg do commit
+  commit -am <mensagem do commit>...-> Idem adicionando arquivos modificados
+  config user.name <nome>...........-> Define o usuário do commit do projeto atual
+  config --global user.name <nome>..-> Idem para todos os projetos
+  config user.mail..................-> Define o email do commit do projeto atual
+  config --global user.mail.........-> Idem para todos os projetos
+  status............................-> Estados dos arquivos
+  log...............................-> Mostra os commits (logs)
+  whatchanged.......................-> Mostra alterações efetuadas
+  whatchanged -p....................-> Idem com mais detalhes
+  rm <file>.........................-> Remove arquivo do git
+  remote add <nome_repositorio> <nome_repositório>.....-> Adiciona repositório local ao remoto
+  push -u <nome_repositorio> <nome_branch>..-> o -u cria um link do repositorio com o branch para não ser mais necessário informa-lo em um novo push
+  pull -> traz os arquivos
+  clone <url> -> clona o repositório
+  branch <nome do branch> -> criar um branch à partir da branch em uso no momento
+  branch -> Mostra o branch atual (local) com -r mostra as remotas e -a mostra todas
+  checkout <nome do branch> -> Troca a branch para a branch informada
+  checkout -b <nome do branch> -> Cria o branch informado e já muda pra ele
+  rebase <nome branch> -> traz os commits do branch informado para o atual
+  rebase --continue -> Continua o processo de rebase após correções de conflitos
+  merge -> Junta informações entre branchs
+  config --global color.ui always | auto | never -> Deixa a saída do git colorida
+
+automatizando uma sequencia de comandos git em bash (colocar git antes dos comandos)
+  checkout master && pull && checkout work && rebase master && checkout master && rebase ou merge && etc...
+Para criar sequencias em lote edite o arquivo .gitconfig e coloque na sessão [alias] o nome do alias = ! e os comandos bash
+
+ex.:
+[alias]
+  ac = ! <comandos> 
+
+Para usar o alias digite: git <nome do alias> 
+
+Atalhos para comandos git não precisam do !
+
+[alias]
+  ct = commit
+  st = status
+
+git ct = git commit 
+git st = git status
+
+
+para ignorar o versionamento de arquivo no git, inclua no .gitignore, caso seja para uma unica máquina, coloque no arquivo
+<projeto>/.git/info/exclude
+
+
+--------
+
+VRaptor
+  Usa o MVC
+  Os controllers são anotados com @Resource
+  O retorno para o jsp segue a convenção de pegar o nome da classe e buscar uma pasta com esse nome e um arquivo jsp com o nome do método
+  A anotação @Component diz que a classe é injetável e onde for para injetá-lo basta chamar no construtor
+  Lógicas de redirecionamento para jsp's ou métodos, basta no controler receber no construtor um objeto do tipo Result
+
+-------------------------------------------------
+
+Aula 2
+
+Em testes
+  1 - Criar os cenários
+  2 - Criar a lógica
+  3 - Verificar resultado da lógica
+
+-------------------------------------------------
+
+Aula 3
+
+Como minimizar o truck factor (quantidade de pessoas que se sairem, para o projeto)
+  -> Pair Programming
+  -> Wiki/Doc
+  -> Treinamento
+  -> Brown Bag (almoço técnico)
+  -> Brainstorm
+  -> Daily
+  -> Review
+  -> Revisão
+  -> Dojo
+
+Coisas que incomodam no código
+  -> Complexidade ciclomática
+  -> Linhas de Código (por método [<25 pois cabe na tela] e por classe [10 metodos aprox.])
+  -> Semântica
+  -> Exceptions
+  -> Performance
+  -> Acoplamento (eferente [quem depende de mim] e aferente[de quem eu dependo])
+  -> Coesão
+  -> Falta de Padronização
+  -> Falta de encapsulamento
+
+Dica: Encontrando um bug durante uma refatoração continue a refatoração (pode ser melhor pois voce cria testes e garate que resolvendo bug nenhum outro é gerado) e deixe um TODO do bug ou resolva o bug e deixe um TODO da refatoração
